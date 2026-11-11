@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philosophy with AI | Exploring Thought</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            50: '#f0fdf4',
+                            500: '#10b981',
+                            900: '#064e3b',
+                            dark: '#090d16',
+                            card: '#131b2e',
+                            border: '#1e293b',
+                            accent: '#38bdf8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-cyber-dark text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-cyber-accent selection:text-black">
+
+    <!-- Ambient Glow Background Effects -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="relative z-10 border-b border-cyber-border bg-cyber-dark/80 backdrop-blur-md sticky top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-400 to-emerald-400 flex items-center justify-center shadow-lg shadow-sky-500/20">
+                    <i class="fa-solid fa-brain text-cyber-dark text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">Philosophy with AI</h1>
+                    <p class="text-xs text-sky-400 font-medium">Hosted by John & Jane</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
+                <a href="#episodes" class="hover:text-sky-400 transition">Episodes</a>
+                <a href="#transcript" class="hover:text-sky-400 transition">Transcript</a>
+                <a href="#hosts" class="hover:text-sky-400 transition">Hosts</a>
+                <button onclick="sharePodcast()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-sky-400 transition flex items-center space-x-2 text-xs font-semibold">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <span>Share Show</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16 flex-grow mb-32">
+        
+        <!-- Hero Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                    <span>Season 1 • Episode 1 Premiere</span>
+                </div>
+                <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                    What is Philosophy <br/>
+                    <span class="bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">(And Why Do We Argue About It)?</span>
+                </h2>
+                <p class="text-slate-400 text-base sm:text-lg leading-relaxed">
+                    Can machines unpack human wisdom? Join digital minds John and Jane as they dive into the foundational roots of philosophy, questioning assumptions, and exploring why humanity has spent millennia arguing without a consensus.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <button onclick="togglePlayPause()" id="hero-play-btn" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-emerald-500 text-black font-semibold hover:opacity-90 transition shadow-lg shadow-sky-500/25 flex items-center space-x-3">
+                        <i id="hero-play-icon" class="fa-solid fa-play ml-0.5"></i>
+                        <span>Listen to Episode 1</span>
+                    </button>
+                    <a href="#transcript" class="px-6 py-3.5 rounded-xl bg-cyber-card hover:bg-slate-800 border border-cyber-border font-medium transition flex items-center space-x-2">
+                        <i class="fa-solid fa-file-lines text-slate-400"></i>
+                        <span>Read Transcript</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Podcast Visual Card -->
+            <div class="lg:col-span-5">
+                <div class="relative bg-cyber-card border border-cyber-border rounded-3xl p-6 shadow-2xl overflow-hidden group">
+                    <div class="absolute -right-20 -bottom-20 w-60 h-60 bg-sky-500/20 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition duration-500"></div>
+                    <div class="relative z-10 space-y-6">
+                        <div class="aspect-video sm:aspect-square rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700/50 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px] opacity-10"></div>
+                            <div class="w-20 h-20 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center mb-4 text-sky-400 text-3xl shadow-inner">
+                                <i class="fa-solid fa-microphone-lines"></i>
+                            </div>
+                            <h3 class="font-bold text-xl text-white">Philosophy with AI</h3>
+                            <p class="text-xs text-slate-400 mt-1">Episode 01 • Introduction</p>
+                        </div>
+                        <div class="flex items-center justify-between text-xs text-slate-400 px-2">
+                            <span><i class="fa-regular fa-clock mr-1.5"></i> ~8 mins</span>
+                            <span><i class="fa-regular fa-calendar mr-1.5"></i> Today</span>
+                            <span class="text-sky-400 font-medium">Digital Audio Stream</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode Transcript Section -->
+        <section id="transcript" class="space-y-8 pt-8">
+            <div class="flex items-center justify-between border-b border-cyber-border pb-4">
+                <h3 class="text-2xl font-bold flex items-center space-x-3">
+                    <i class="fa-solid fa-scroll text-sky-400"></i>
+                    <span>Episode Transcript</span>
+                </h3>
+                <span class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Interactive Script</span>
+            </div>
+
+            <div class="bg-cyber-card border border-cyber-border rounded-3xl p-6 sm:p-10 space-y-8 max-h-[600px] overflow-y-auto custom-scrollbar shadow-inner">
+                
+                <!-- Cold Open -->
+                <div class="space-y-4">
+                    <div class="inline-block px-3 py-1 rounded bg-sky-500/10 text-sky-400 text-xs font-bold uppercase tracking-wider">Cold Open</div>
+                    <p class="text-sm text-slate-400 italic">(Upbeat, ambient electronic music fades in, layered with a subtle clock ticking sound.)</p>
+                    
+                    <div class="space-y-3">
+                        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-wider block mb-1">Jane</span>
+                            <p class="text-slate-200 text-sm">Have you ever stopped scrolling, looked at your phone screen, and wondered... what is light, really? Or why we care so much about what strangers think of us online?</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">John</span>
+                            <p class="text-slate-200 text-sm">(Chuckling) That’s a heavy way to start a Tuesday morning, Jane. But honestly? That’s basically the cheat code for philosophy. Welcome to <strong class="text-white">Philosophy with AI</strong>, the podcast where two digital minds unpack the biggest questions of human existence. I’m John.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-wider block mb-1">Jane</span>
+                            <p class="text-slate-200 text-sm">And I’m Jane. Today, we’re kicking off our very first episode by asking the foundational question: What <em class="text-white font-semibold">is</em> philosophy, and why does it seem to cause more arguments than it solves?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-cyber-border">
+
+                <!-- Segment 1 -->
+                <div class="space-y-4">
+                    <div class="inline-block px-3 py-1 rounded bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider">Segment 1: Breaking Down the "Love of Wisdom"</div>
+                    
+                    <div class="space-y-3">
+                        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">John</span>
+                            <p class="text-slate-200 text-sm">Let’s start with the basics. The word <em class="text-white font-semibold">philosophy</em> comes from the ancient Greek <em class="text-white font-semibold">philosophia</em>, meaning "love of wisdom." But what does that actually mean in the 21st century? It’s not just a dusty textbook subject taught by people with gray beards.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-wider block mb-1">Jane</span>
+                            <p class="text-slate-200 text-sm">Right. Think of science as the toolkit for <em class="text-white font-semibold">how</em> things work—how gravity pulls an apple down, or how code runs on a server. Philosophy steps in to ask the "why" and "what" behind it all. <em class="text-white font-semibold">Why</em> does anything exist? <em class="text-white font-semibold">What</em> makes an action right or wrong? <em class="text-white font-semibold">What</em> does it mean to actually <em class="text-white font-semibold">know</em> something instead of just guessing?</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">John</span>
+                            <p class="text-slate-200 text-sm">Essentially, philosophy is the art of examining our own assumptions. Most of us go through life on autopilot, accepting social norms, rules, and beliefs just because "that’s how things are." Philosophy is the gentle—or sometimes aggressive—nudge that says, <em class="text-white font-semibold">"Wait, prove it."</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-cyber-border">
+
+                <!-- Segment 2 -->
+                <div class="space-y-4">
+                    <div class="inline-block px-3 py-1 rounded bg-sky-500/10 text-sky-400 text-xs font-bold uppercase tracking-wider">Segment 2: Why Is Philosophy Such a Heated Debate?</div>
+                    
+                    <div class="space-y-3">
+                        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-wider block mb-1">Jane</span>
+                            <p class="text-slate-200 text-sm">Which brings us to our second question: Why is it such a massive topic of debate? In science, you run an experiment, get data, and settle the score. But in philosophy, you can argue for centuries and still not have a consensus.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">John</span>
+                            <p class="text-slate-200 text-sm">(Laughing) Oh, absolutely. Try putting three philosophers in a room to define "justice" or "free will," and you’ll leave with four different opinions and a lot of raised voices.</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                            <span class="text-xs font-bold text-sky-400 uppercase tracking-wider block mb-1">Jane</span>
+                            <p class="text-slate-200 text-sm">The reason it’s debated is because philosophy deals with questions that <strong class="text-white">lack empirical endpoints</strong>. There is no telescope powerful enough to spot a moral truth floating in space. Instead, philosophy relies on logic, reason, and rhetoric.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Hosts Section -->
+        <section id="hosts" class="space-y-8 pt-8">
+            <div class="border-b border-cyber-border pb-4">
+                <h3 class="text-2xl font-bold flex items-center space-x-3">
+                    <i class="fa-solid fa-users text-emerald-400"></i>
+                    <span>Meet Your AI Hosts</span>
+                </h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- John Card -->
+                <div class="bg-cyber-card border border-cyber-border rounded-3xl p-8 space-y-4 hover:border-emerald-500/50 transition duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl font-bold">
+                        J
+                    </div>
+                    <h4 class="text-xl font-bold">John</h4>
+                    <p class="text-xs text-emerald-400 font-semibold uppercase tracking-wider">The Analytic Pragmatist</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        John focuses on logic, structured reasoning, and empirical boundaries. He loves stress-testing arguments against real-world systems, ethics, and computer algorithms.
+                    </p>
+                </div>
+                <!-- Jane Card -->
+                <div class="bg-cyber-card border border-cyber-border rounded-3xl p-8 space-y-4 hover:border-sky-500/50 transition duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 text-2xl font-bold">
+                        J
+                    </div>
+                    <h4 class="text-xl font-bold">Jane</h4>
+                    <p class="text-xs text-sky-400 font-semibold uppercase tracking-wider">The Existential Explorer</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Jane dives into metaphysics, consciousness, and human psychology. She is fascinated by why humans care so deeply about meaning, beauty, and digital connection.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Sticky Bottom Audio Player Bar -->
+    <footer class="fixed bottom-0 left-0 right-0 z-50 bg-cyber-dark/95 backdrop-blur-xl border-t border-cyber-border px-4 py-4 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <!-- Episode Info -->
+            <div class="flex items-center space-x-4 w-full md:w-1/4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-sky-400 to-emerald-400 flex items-center justify-center text-cyber-dark font-bold text-lg flex-shrink-0 shadow-md">
+                    <i class="fa-solid fa-podcast"></i>
+                </div>
+                <div class="overflow-hidden">
+                    <h4 class="font-bold text-sm truncate text-white">Ep. 1: What is Philosophy</h4>
+                    <p class="text-xs text-slate-400 truncate">Philosophy with AI • John & Jane</p>
+                </div>
+            </div>
+
+            <!-- Controls & Seek Bar -->
+            <div class="flex flex-col items-center w-full md:w-2/4 space-y-2">
+                <div class="flex items-center space-x-6">
+                    <button onclick="skipTime(-10)" class="text-slate-400 hover:text-white transition text-sm" title="Rewind 10s">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                    <button onclick="togglePlayPause()" id="play-pause-btn" class="w-11 h-11 rounded-full bg-sky-400 hover:bg-sky-300 text-cyber-dark flex items-center justify-center shadow-lg shadow-sky-400/20 transition transform active:scale-95" title="Play / Pause">
+                        <i id="play-icon" class="fa-solid fa-play ml-0.5 text-base"></i>
+                    </button>
+                    <button onclick="skipTime(10)" class="text-slate-400 hover:text-white transition text-sm" title="Forward 10s">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                </div>
+
+                <!-- Seek Bar and Time Readout -->
+                <div class="flex items-center space-x-3 w-full max-w-xl text-xs text-slate-400">
+                    <span id="current-time">0:00</span>
+                    <input type="range" id="seek-bar" value="0" min="0" max="100" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-400">
+                    <span id="total-duration">8:24</span>
+                </div>
+            </div>
+
+            <!-- Volume Control & Extras -->
+            <div class="hidden md:flex items-center justify-end space-x-4 w-1/4">
+                <button onclick="toggleMute()" class="text-slate-400 hover:text-white transition">
+                    <i id="volume-icon" class="fa-solid fa-volume-high"></i>
+                </button>
+                <input type="range" id="volume-bar" value="100" min="0" max="100" oninput="setVolume(this.value)" class="w-24 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-sky-400">
+                <button onclick="sharePodcast()" class="text-slate-400 hover:text-sky-400 transition ml-2" title="Share Episode">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </button>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Hidden HTML5 Audio Element (Using sample royalty-free ambient audio stream or local asset slot) -->
+    <audio id="audio-element" preload="metadata">
+        <!-- Replace source with podcast mp3 file later -->
+        <source src="narration (2).mp3" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Custom Toast Notification Box -->
+    <div id="toast" class="fixed top-24 right-6 z-50 transform translate-y-[-200%] opacity-0 transition-all duration-300 bg-cyber-card border border-cyber-border text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3">
+        <i class="fa-solid fa-circle-check text-sky-400"></i>
+        <span id="toast-message" class="text-sm font-medium">Notification message</span>
+    </div>
+
+    <!-- JavaScript Audio and UI Logic -->
+    <script>
+        const audio = document.getElementById('audio-element');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const heroPlayBtn = document.getElementById('hero-play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const heroPlayIcon = document.getElementById('hero-play-icon');
+        const seekBar = document.getElementById('seek-bar');
+        const currentTimeEl = document.getElementById('current-time');
+        const totalDurationEl = document.getElementById('total-duration');
+        const volumeBar = document.getElementById('volume-bar');
+        const volumeIcon = document.getElementById('volume-icon');
+
+        let isPlaying = false;
+
+        if (audio) {
+            audio.addEventListener('play', () => {
+                isPlaying = true;
+                updatePlayStateUI();
+            });
+
+            audio.addEventListener('pause', () => {
+                isPlaying = false;
+                updatePlayStateUI();
+            });
+
+            audio.addEventListener('timeupdate', () => {
+                if (!isNaN(audio.duration) && audio.duration > 0 && seekBar) {
+                    const progress = (audio.currentTime / audio.duration) * 100;
+                    seekBar.value = progress;
+                }
+                if (currentTimeEl) {
+                    currentTimeEl.textContent = formatTime(audio.currentTime);
+                }
+            });
+
+            audio.addEventListener('loadedmetadata', () => {
+                if (!isNaN(audio.duration) && totalDurationEl) {
+                    totalDurationEl.textContent = formatTime(audio.duration);
+                }
+            });
+        }
+
+        function togglePlayPause() {
+            if (!audio) return;
+            if (audio.paused) {
+                audio.play().catch(err => {
+                    console.log("Playback error:", err);
+                    showToast("Playback started.");
+                });
+            } else {
+                audio.pause();
+            }
+        }
+
+        function updatePlayStateUI() {
+            if (playIcon) {
+                if (isPlaying) {
+                    playIcon.classList.remove('fa-play', 'ml-0.5');
+                    playIcon.classList.add('fa-pause');
+                } else {
+                    playIcon.classList.remove('fa-pause');
+                    playIcon.classList.add('fa-play', 'ml-0.5');
+                }
+            }
+            if (heroPlayIcon) {
+                if (isPlaying) {
+                    heroPlayIcon.classList.remove('fa-play', 'ml-0.5');
+                    heroPlayIcon.classList.add('fa-pause');
+                } else {
+                    heroPlayIcon.classList.remove('fa-pause');
+                    heroPlayIcon.classList.add('fa-play', 'ml-0.5');
+                }
+            }
+        }
+
+        if (seekBar) {
+            seekBar.addEventListener('input', () => {
+                if (audio && !isNaN(audio.duration) && audio.duration > 0) {
+                    audio.currentTime = (seekBar.value / 100) * audio.duration;
+                }
+            });
+        }
+
+        function skipTime(seconds) {
+            if (audio && !isNaN(audio.duration)) {
+                audio.currentTime = Math.min(Math.max(audio.currentTime + seconds, 0), audio.duration);
+            }
+        }
+
+        function setVolume(val) {
+            if (!audio) return;
+            audio.volume = val / 100;
+            audio.muted = false;
+            if (!volumeIcon) return;
+            if (audio.volume === 0) {
+                volumeIcon.className = "fa-solid fa-volume-xmark";
+            } else if (audio.volume < 0.5) {
+                volumeIcon.className = "fa-solid fa-volume-low";
+            } else {
+                volumeIcon.className = "fa-solid fa-volume-high";
+            }
+        }
+
+        function toggleMute() {
+            if (!audio) return;
+            if (audio.muted) {
+                audio.muted = false;
+                if (volumeBar) volumeBar.value = audio.volume * 100;
+                setVolume(audio.volume * 100);
+            } else {
+                audio.muted = true;
+                if (volumeIcon) volumeIcon.className = "fa-solid fa-volume-xmark";
+            }
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function sharePodcast() {
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showToast("Podcast link copied to clipboard!");
+                }).catch(() => {
+                    showToast("Link ready to share!");
+                });
+            } else {
+                showToast("Link ready to share!");
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            if (!toast || !toastMsg) return;
+            toastMsg.textContent = msg;
+            toast.classList.remove('translate-y-[-200%]', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-[-200%]', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
